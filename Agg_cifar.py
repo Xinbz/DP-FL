@@ -47,10 +47,10 @@ for i in range(num_client - 100):
     soft_label_pro.append(soft_label_pro[r])
     M_soft_label_pro.append(M_soft_label_pro[r])
 
-for p in range(num_client):
-    for q in range(2000):
-        soft_label_pro[p][q] += np.random.laplace(0,2./eps,10)
-        M_soft_label_pro[p][q] += np.random.laplace(0,2./eps, 10)
+# for p in range(num_client):
+#     for q in range(2000):
+#         soft_label_pro[p][q] += np.random.laplace(0,2./eps,10)
+#         M_soft_label_pro[p][q] += np.random.laplace(0,2./eps, 10)
 
 soft_label_1 = []
 for j in range(num_client):
@@ -88,7 +88,7 @@ for w in range(20):
                 sumf = np.zeros([1, 10])
                 if (smooth >= len(my_list[bb])):
                     avgf = np.sum(soft_label[aa][my_list[bb]], axis=0) / len(my_list[bb])
-                    # avgf += np.random.laplace(0, 0.89, 10)
+                    avgf += np.random.laplace(0, 2./eps, 10)
                     for cc in my_list[bb]:
                         soft_label[aa][cc] = avgf
                     avgf = np.zeros([1, 10])
@@ -96,7 +96,7 @@ for w in range(20):
                     for cc in range(len(my_list[bb])):
                         if (cc % int(smooth) == 0) and (cc != 0):
                             avgf = sumf / smooth
-                            # avgf += np.random.laplace(0,0.89,10)
+                            avgf += np.random.laplace(0, 2./eps,10)
                             for dd in jcq:
                                 soft_label[aa][dd] = avgf
                             jcq.clear()

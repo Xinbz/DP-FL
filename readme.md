@@ -4,4 +4,4 @@ create non-iid datasets：create_dirichlet_cifar.py, create_dirichlet_mnist.py
 
 train local model: VGG.py, Resnet.py, Mobilenet.py
 
-aggregate soft lables: Agg_mnist.py, Agg_cifar.py
+aggregate soft labels: Agg_mnist.py, Agg_cifar.py
