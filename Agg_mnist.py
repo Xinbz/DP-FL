@@ -88,10 +88,7 @@ for i in range(num_client - 100):
     soft_label_pro.append(soft_label_pro[r])
     M_soft_label_pro.append(M_soft_label_pro[r])
 
-# for p in range(num_client):
-#     for q in range(2000):
-#         soft_label_pro[p][q] += np.random.laplace(0,2./eps,10)
-        # M_soft_label_pro[p][q] += np.random.laplace(0, 2./eps, 10)
+
 
 
 for j in range(num_client):
@@ -101,10 +98,7 @@ for j in range(num_client):
         soft_label_1.append(M_soft_label_pro[j])
 
 
-# for i in range(num_client-100):
-#     # r = random.randint(0,99)
-#     r = i%100
-#     soft_label_pro.append(soft_label_pro[r])
+
 for k in range(20):
     soft_label = copy.deepcopy(soft_label_pro[:num_client])
     # soft_label = copy.deepcopy(soft_label_1[:num_client])
@@ -119,7 +113,7 @@ for k in range(20):
                 sumf = np.zeros([1, 10])
                 if (smooth >= len(my_list[bb])):
                     avgf = np.sum(soft_label[aa][my_list[bb]], axis=0) / len(my_list[bb])
-                    avgf += np.random.laplace(0, 2./eps, 10)
+                    avgf += np.random.laplace(0, 2./(eps*smooth), 10)
                     for cc in my_list[bb]:
                         soft_label[aa][cc] = avgf
                     avgf = np.zeros([1, 10])
@@ -127,7 +121,7 @@ for k in range(20):
                     for cc in range(len(my_list[bb])):
                         if (cc % int(smooth) == 0) and (cc != 0):
                             avgf = sumf / smooth
-                            avgf += np.random.laplace(0,2./eps,10)
+                            avgf += np.random.laplace(0,2./(eps*smooth),10)
                             for dd in jcq:
                                 soft_label[aa][dd] = avgf
                             jcq.clear()
@@ -162,9 +156,7 @@ for k in range(20):
     print(avg[k])
 print(np.average(av), np.average(account), np.average(avg))
 
-    # re_data = np.hstack((public_data, soft_labels))
-    # re_data = np.delete(re_data, index, 0)
-    # np.save('./data/mnist/0.1/2_round_data.npy',re_data)
+
 ax = np.array(account)
 bx = np.array(avg)
 cx = np.array(av)

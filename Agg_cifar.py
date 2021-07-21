@@ -47,10 +47,6 @@ for i in range(num_client - 100):
     soft_label_pro.append(soft_label_pro[r])
     M_soft_label_pro.append(M_soft_label_pro[r])
 
-# for p in range(num_client):
-#     for q in range(2000):
-#         soft_label_pro[p][q] += np.random.laplace(0,2./eps,10)
-#         M_soft_label_pro[p][q] += np.random.laplace(0,2./eps, 10)
 
 soft_label_1 = []
 for j in range(num_client):
@@ -61,9 +57,7 @@ for j in range(num_client):
 
 
 public_labels = public_labels[:num_sample]
-# for p in range(num_client):
-#     for q in range(num_sample):
-#         soft_label_pro[p][q] += np.random.laplace(0,2/eps,10)
+
 
 
 
@@ -88,7 +82,7 @@ for w in range(20):
                 sumf = np.zeros([1, 10])
                 if (smooth >= len(my_list[bb])):
                     avgf = np.sum(soft_label[aa][my_list[bb]], axis=0) / len(my_list[bb])
-                    avgf += np.random.laplace(0, 2./eps, 10)
+                    avgf += np.random.laplace(0, 2./(eps*smooth), 10)
                     for cc in my_list[bb]:
                         soft_label[aa][cc] = avgf
                     avgf = np.zeros([1, 10])
@@ -96,7 +90,7 @@ for w in range(20):
                     for cc in range(len(my_list[bb])):
                         if (cc % int(smooth) == 0) and (cc != 0):
                             avgf = sumf / smooth
-                            avgf += np.random.laplace(0, 2./eps,10)
+                            avgf += np.random.laplace(0, 2./(eps*smooth),10)
                             for dd in jcq:
                                 soft_label[aa][dd] = avgf
                             jcq.clear()
@@ -120,11 +114,7 @@ for w in range(20):
         if count != 0:
             soft_labels[j] = num/count
 
-    # soft_label = np.array(soft_label)
-    # soft_label = soft_label.transpose((1, 0, 2))
-    # for j in range(num_sample):
-    #     avgf = np.sum(soft_label[j], axis=0) / num_client
-    #     soft_labels[j] = avgf
+
 
 
     index = np.where(np.amax(soft_labels,axis=1)<b[1])
@@ -137,11 +127,7 @@ for w in range(20):
     account.append(diff.size)
     avg.append(x[0].size / diff.size)
     print(avg[w])
-    # print('1')
-    # re_data = np.hstack((public_data, soft_labels))
-    # re_data = np.delete(re_data, index, 0)
-    # np.save('./data/cifar/0.1/eps_1.npy',re_data)
+
 print(np.average(av), np.average(account), np.average(avg))
 
 print(0)
-    # print(avg[w])
